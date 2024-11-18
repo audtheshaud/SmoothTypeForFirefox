@@ -7,10 +7,9 @@ When I went to find a Microsoft Word style equivalent for Firefox, I became very
 
 
 ## To use it:
-1. download the code as a .ZIP and extract
+1. Download the code as a .ZIP and extract
 2. Type about:debugging in your Firefox search bar
 3. Click on the "This Firefox" tab.
 4. Click on Choose Load Temporary Add-on
 5. Open the unzipped folder in your file manager and choose manifest.json
 6. Go into Google Docs and see everything work as expected!
-# SmoothTypeForFirefox
