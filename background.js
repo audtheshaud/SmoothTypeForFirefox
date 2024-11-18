@@ -1,5 +1,5 @@
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.action.setIcon({ path: "icons/icon16.png" });
+browser.runtime.onInstalled.addListener(() => {
+    browser.action.setIcon({ path: "icons/icon16.png" });
   });
   
   // Function to check if the URL is supported
@@ -27,36 +27,36 @@ chrome.runtime.onInstalled.addListener(() => {
   
   // Update icon and storage based on URL
   function updateIconAndStorage(tabId) {
-    chrome.tabs.get(tabId, (tab) => {
+    browser.tabs.get(tabId, (tab) => {
       if (tab.url && typeof tab.url === 'string' && isValidUrl(tab.url)) {
         const url = new URL(tab.url);
         const isSupported = checkSupport(url.href);
-        chrome.action.setIcon({ 
+        browser.action.setIcon({ 
           path: isSupported ? "icons/icon16.png" : "icons/icon16_grey.png" 
         });
-        chrome.storage.local.set({ isSupported });
+        browser.storage.local.set({ isSupported });
       } else {
         // Handle invalid URL case
         // console.error("Invalid URL:", tab.url);
-        chrome.action.setIcon({ path: "icons/icon16_grey.png" });
-        chrome.storage.local.set({ isSupported: false });
+        browser.action.setIcon({ path: "icons/icon16_grey.png" });
+        browser.storage.local.set({ isSupported: false });
       }
     });
   }
   
   // Monitor tab changes
-  chrome.webNavigation.onCompleted.addListener((details) => {
+  browser.webNavigation.onCompleted.addListener((details) => {
     if (details.frameId === 0) { // Only for the main frame
       updateIconAndStorage(details.tabId);
     }
   }, { url: [{ urlMatches: '.*' }] });
   
   // Monitor tab activation
-  chrome.tabs.onActivated.addListener((activeInfo) => {
+  browser.tabs.onActivated.addListener((activeInfo) => {
     updateIconAndStorage(activeInfo.tabId);
   });
 
-  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete') {
       updateIconAndStorage(tabId);
     }

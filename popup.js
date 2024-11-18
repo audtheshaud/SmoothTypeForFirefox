@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const easingSelect = document.getElementById('easing');
   const saveButton = document.getElementById('save');
 
-  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+  browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
     const currentTab = tabs[0];
     if (currentTab && currentTab.url) {
       const isSupported = checkSupport(currentTab.url);
@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
       settingsDiv.classList.remove('hidden');
       unsupportedDiv.classList.add('hidden');
 
-      // Load the saved delay and easing value from Chrome storage
-      chrome.storage.sync.get(['transitionDelay', 'transitionEasing'], (data) => {
+      // Load the saved delay and easing value from browser storage
+      browser.storage.sync.get(['transitionDelay', 'transitionEasing'], (data) => {
         if (data.transitionDelay) {
           delayInput.value = data.transitionDelay;
         }
@@ -30,12 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Save the delay and easing value to Chrome storage
+      // Save the delay and easing value to browser storage
       saveButton.addEventListener('click', () => {
         const delay = delayInput.value;
         const easing = easingSelect.value;
-        chrome.storage.sync.set({ transitionDelay: delay, transitionEasing: easing }, () => {
-          alert('Transition settings saved! Reload to apply changes!');
+        browser.storage.sync.set({ transitionDelay: delay, transitionEasing: easing }, () => {
+          alert('Transition settings saved! The page will reload to apply changes.');
+          browser.tabs.reload();  // This will reload the current tab to apply the changes
         });
       });
     } else {
