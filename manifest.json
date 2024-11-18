@@ -1,0 +1,39 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "icons/icon128.png",
+         "16": "icons/icon16.png",
+         "48": "icons/icon48.png"
+      },
+      "default_popup": "popup.html"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "js": [ "docs.js" ],
+      "matches": [ "https://docs.google.com/document/*", "http://docs.google.com/document/*" ],
+      "run_at": "document_idle"
+   }, {
+      "js": [ "sheets.js" ],
+      "matches": [ "https://docs.google.com/spreadsheets/*", "http://docs.google.com/spreadsheets/*" ],
+      "run_at": "document_idle"
+   }, {
+      "js": [ "overleaf.js" ],
+      "matches": [ "https://www.overleaf.com/project/*", "http://www.overleaf.com/project/*" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "Enhance text editors with a smooth, Microsoft Word-style cursor caret animation.",
+   "icons": {
+      "128": "icons/icon128.png",
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4d8p7IoVIs/Jh8n6G7ytR3T0TeAltm9eaoDNebm6LJsXHwMfroJEtsLgmj9Ei9swIqbGUKbGiQogHZnR42Fc47mvAcbnkNL2YGx1XrTF3VsuzcRwtVToA7AreH3uVw6MRFp55ILUSnC9m4NkP3j8OWqY4OnF9beM8lsocQlz75jCmCrT7JULLkIXuZVhJAD0/6mvYxh8EPGUNUwXh2LU9mwd5hvsBPgweUS7HqH3CK/pUU/hKgVpeK6Lj6SuGIDqS3HjTy9O/fFYAfPdx8RdjJ4qCar7Cbt9KVx5NA4vAEu0LRVCz7KMgD+z4b47Gj9FIADcL/RjM0p/rOxBvO+joQIDAQAB",
+   "manifest_version": 3,
+   "name": "SmoothType",
+   "permissions": [ "storage", "webNavigation", "activeTab" ],
+   "short_name": "SmoothType",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.0.1"
+}
