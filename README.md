@@ -2,9 +2,9 @@
 
 When I went to find a Microsoft Word style equivalent for Firefox, I became very disappointed in the lack of options. I found an extension on Chrome and edited the files in order for it to function on FireFox.
 
-# ALL CREDIT GOES TO https://github.com/jsz-05/jsz-SmoothType for making this amazing Chrome Extension !!!
+## ALL CREDIT GOES TO https://github.com/jsz-05/jsz-SmoothType for making this amazing Chrome Extension !!!
 
-
+## It is still somewhat broken, as I have only just started going through the code
 
 ## To use it:
 1. Download the code as a .ZIP and extract
