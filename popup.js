@@ -20,20 +20,26 @@ document.addEventListener('DOMContentLoaded', () => {
       settingsDiv.classList.remove('hidden');
       unsupportedDiv.classList.add('hidden');
 
-      // Load the saved delay and easing value from browser storage
+      // Load the saved delay and easing values from storage
       browser.storage.local.get(['transitionDelay', 'transitionEasing']).then((data) => {
-        console.log('Loaded data:', data);  // Log to check what is loaded from storage
-        delayInput.value = data.transitionDelay !== undefined ? data.transitionDelay : 80;
-        easingSelect.value = data.transitionEasing || 'ease';
+        delayInput.value = data.transitionDelay || 80; // Default to 80ms
+        easingSelect.value = data.transitionEasing || 'ease'; // Default to 'ease'
       });
 
-      // Save the delay and easing value to browser storage
+      // Save the new delay and easing values and apply them immediately
       saveButton.addEventListener('click', () => {
-        const delay = delayInput.value;
+        const delay = parseInt(delayInput.value, 10);
         const easing = easingSelect.value;
-        browser.storage.local.set({ transitionDelay: delay, transitionEasing: easing }, () => {
-          alert('Transition settings saved! The page will reload to apply changes.');
-          browser.tabs.reload();  // This will reload the current tab to apply the changes
+
+        // Save settings to storage
+        browser.storage.local.set({ transitionDelay: delay, transitionEasing: easing }).then(() => {
+          // Send a message to the content script to apply the new settings
+          browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+            const currentTab = tabs[0];
+            browser.tabs.sendMessage(currentTab.id, { action: 'updateSettings', delay, easing });
+          });
+
+          alert('Settings applied successfully!');
         });
       });
     } else {
