@@ -14,12 +14,24 @@ function applyTransitionEffectToActiveCells(delay) {
   }
 }
 
-// Get the transition delay from Chrome storage and apply the transition effect
-chrome.storage.sync.get(['transitionDelay'], (data) => {
-  const delay = data.transitionDelay || 100; // Default to 100ms if not set
-  applyTransitionEffectToActiveCells(delay);
-
-  // Observe for changes in the document and reapply the transition effect
-  const observer = new MutationObserver(() => applyTransitionEffectToActiveCells(delay));
-  observer.observe(document.body, { childList: true, subtree: true });
+// Listen for messages from the popup to update settings dynamically
+browser.runtime.onMessage.addListener((message) => {
+  if (message.action === 'updateSettings') {
+    const { delay } = message;
+    applyTransitionEffectToActiveCells(delay);
+  }
 });
+
+// Load initial settings when the content script is first injected
+browser.storage.local.get(['transitionDelay'])
+  .then((data) => {
+    const delay = data.transitionDelay || 100; // Default to 100ms if not set
+    applyTransitionEffectToActiveCells(delay);
+
+    // Observe DOM changes and reapply the transition effect
+    const observer = new MutationObserver(() => applyTransitionEffectToActiveCells(delay));
+    observer.observe(document.body, { childList: true, subtree: true });
+  })
+  .catch((error) => {
+    console.error('Error loading transition delay from storage:', error);
+  });
