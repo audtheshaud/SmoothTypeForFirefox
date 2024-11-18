@@ -4,10 +4,9 @@ When I went to find a Microsoft Word style equivalent for Firefox, I became very
 
 # ALL CREDIT GOES TO https://github.com/jsz-05/jsz-SmoothType !!!
 
-To use it:
 
-## Installation steps
-If you want to install this extension unpacked:
+
+## To use it:
 1. download the code as a .ZIP and extract
 2. Type about:debugging in your Firefox search bar
 3. Click on the "This Firefox" tab.
