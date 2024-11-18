@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Load the saved delay and easing value from browser storage
       browser.storage.sync.get(['transitionDelay', 'transitionEasing'], (data) => {
+        console.log('Loaded data:', data);  // Log to check what is loaded from storage
         if (data.transitionDelay) {
           delayInput.value = data.transitionDelay;
         }
