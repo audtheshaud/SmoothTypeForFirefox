@@ -7,7 +7,9 @@ function applyTransitionEffectToActiveCells(delay) {
       let parent = element.parentElement;
 
       while (parent) {
-        parent.style.transition = `all ${delay}ms`;
+        if (!parent.style.transition.includes(`${delay}ms`)) {
+          parent.style.transition = `all ${delay}ms`;
+        }
         parent = parent.parentElement;
       }
     }
@@ -25,7 +27,7 @@ browser.runtime.onMessage.addListener((message) => {
 // Load initial settings when the content script is first injected
 browser.storage.local.get(['transitionDelay'])
   .then((data) => {
-    const delay = data.transitionDelay || 100; // Default to 100ms if not set
+    const delay = parseInt(data.transitionDelay, 10) || 80; // Default to 80ms if not set
     applyTransitionEffectToActiveCells(delay);
 
     // Observe DOM changes and reapply the transition effect
