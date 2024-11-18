@@ -1,6 +1,6 @@
 # SmoothTypeForFirefox
 
-When I went to find a Microsoft Word style equivalkent for Firefox, I became very disappointed in the lack of options. I found an exxtension on Chrome and edited the files in order for it to function on FireFox.
+When I went to find a Microsoft Word style equivalent for Firefox, I became very disappointed in the lack of options. I found an exxtension on Chrome and edited the files in order for it to function on FireFox.
 To use it:
 
 ## Installation steps
