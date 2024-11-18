@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const easingSelect = document.getElementById('easing');
   const saveButton = document.getElementById('save');
 
-  browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
+  browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
     const currentTab = tabs[0];
     if (currentTab && currentTab.url) {
       const isSupported = checkSupport(currentTab.url);
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const easing = easingSelect.value;
 
         // Save settings to storage
-        browser.storage.local.set({ transitionDelay: delay, transitionEasing: easing }).then(() => {
+        browser.storage.local.set({ transitionDelay: delay, transitionEasing: easing }, () => {
           // Send a message to the content script to apply the new settings
           saveButton.textContent = 'Saved!';
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             saveButton.textContent = 'Save';
           }, 2000); // Reset text after 2 seconds
-          
+
           browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
             const currentTab = tabs[0];
             browser.tabs.sendMessage(currentTab.id, { action: 'updateSettings', delay, easing });
