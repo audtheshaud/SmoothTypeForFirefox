@@ -8,6 +8,7 @@ function applyTransitionEffect(delay, easing) {
       if (cursor.style.transition !== `all ${delay}ms ${easing}`) {
         // Apply the transition effect to each cursor
         cursor.style.transition = `all ${delay}ms ${easing}`;
+      }
     }
   }
 }
