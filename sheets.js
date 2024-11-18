@@ -1,3 +1,19 @@
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all elements with the 'active-cell-border' class
+  const activeCellElements = document.querySelectorAll('.active-cell-border');
+
+  // Log the number of elements found
+  console.log(`Found ${activeCellElements.length} element(s) with the 'active-cell-border' class.`);
+
+  // Check if any elements with this class are found
+  if (activeCellElements.length > 0) {
+    console.log(`Found ${activeCellElements.length} element(s) with the 'active-cell-border' class.`);
+  } else {
+    console.log('No elements with the "active-cell-border" class found.');
+  }
+});
+
+
 // Function to apply transition effect to elements with class 'active-cell-border' and their parents
 function applyTransitionEffectToActiveCells(delay) {
   const targetElements = document.getElementsByClassName("active-cell-border");
