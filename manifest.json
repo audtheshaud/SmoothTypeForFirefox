@@ -1,41 +1,41 @@
 {
-   "action": {
-      "default_icon": {
-         "128": "icons/icon128.png",
-         "16": "icons/icon16.png",
-         "48": "icons/icon48.png"
-      },
-      "default_popup": "popup.html"
-   },
-   "background": {
-    "scripts": ["background.js"]
-   },
-   "content_scripts": [
-     {
-       "js": ["docs.js"],
-       "matches": ["https://docs.google.com/document/*", "http://docs.google.com/document/*"],
-       "run_at": "document_idle"
+  "action": {
+     "default_icon": {
+        "128": "icons/icon128.png",
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png"
      },
-     {
-       "js": ["sheets.js"],
-       "matches": ["https://docs.google.com/spreadsheets/*", "http://docs.google.com/spreadsheets/*"],
-       "run_at": "document_idle"
-     },
-     {
-       "js": ["overleaf.js"],
-       "matches": ["https://www.overleaf.com/project/*", "http://www.overleaf.com/project/*"],
-       "run_at": "document_idle"
-     }
-   ],
-   "description": "Enhance text editors with a smooth, Microsoft Word-style cursor caret animation.",
-   "icons": {
-     "128": "icons/icon128.png",
-     "16": "icons/icon16.png",
-     "48": "icons/icon48.png"
-   },
-   "manifest_version": 3,
-   "name": "SmoothType",
-   "permissions": ["storage", "webNavigation", "activeTab"],
-   "short_name": "SmoothType",
-   "version": "0.0.1"
- }
+     "default_popup": "popup.html"
+  },
+  "background": {
+   "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "js": ["docs.js"],
+      "matches": ["https://docs.google.com/document/*", "http://docs.google.com/document/*"],
+      "run_at": "document_idle"
+    },
+    {
+      "js": ["sheets.js"],
+      "matches": ["https://docs.google.com/spreadsheets/*", "http://docs.google.com/spreadsheets/*"],
+      "run_at": "document_idle"
+    },
+    {
+      "js": ["overleaf.js"],
+      "matches": ["https://www.overleaf.com/project/*", "http://www.overleaf.com/project/*"],
+      "run_at": "document_idle"
+    }
+  ],
+  "description": "Enhance text editors with a smooth, Microsoft Word-style cursor caret animation.",
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "manifest_version": 3,
+  "name": "SmoothType",
+  "permissions": ["storage", "webNavigation", "activeTab"],
+  "short_name": "SmoothType",
+  "version": "0.0.1"
+}
