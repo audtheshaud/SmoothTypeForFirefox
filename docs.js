@@ -11,7 +11,7 @@ function applyTransitionEffect(delay, easing) {
 }
 
 // Get the transition delay and easing function from browser storage and apply the transition effect
-browser.storage.sync.get(['transitionDelay', 'transitionEasing']).then((data) => {
+browser.storage.local.get(['transitionDelay', 'transitionEasing']).then((data) => {
   const delay = data.transitionDelay || 100; // Default to 100ms if not set
   const easing = data.transitionEasing || 'ease'; // Default to 'ease' if not set
   applyTransitionEffect(delay, easing);

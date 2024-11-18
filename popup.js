@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveButton.addEventListener('click', () => {
         const delay = delayInput.value;
         const easing = easingSelect.value;
-        browser.storage.sync.set({ transitionDelay: delay, transitionEasing: easing }, () => {
+        browser.storage.local.set({ transitionDelay: delay, transitionEasing: easing }, () => {
           alert('Transition settings saved! The page will reload to apply changes.');
           browser.tabs.reload();  // This will reload the current tab to apply the changes
         });

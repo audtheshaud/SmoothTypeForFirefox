@@ -16,7 +16,7 @@ function applyTransitionEffect(delay, easing) {
 
 // Function to check for cursor elements and apply styles
 function initialize() {
-  chrome.storage.sync.get(['transitionDelay', 'transitionEasing'], (data) => {
+  browser.storage.local.get(['transitionDelay', 'transitionEasing'], (data) => {
     const delay = data.transitionDelay || 100; // Default to 100ms if not set
     const easing = data.transitionEasing || 'ease'; // Default to 'ease' if not set
     applyTransitionEffect(delay, easing);
