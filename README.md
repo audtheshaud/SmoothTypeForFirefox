@@ -5,8 +5,6 @@ When I went to find a Microsoft Word style equivalent for Firefox, I became very
 ## ALL CREDIT GOES TO https://github.com/jsz-05/jsz-SmoothType 
 ## They made this amazing Chrome Extension!!!
 
-
-
 ## To use it:
 1. Download the code as a .ZIP and extract
 2. Type about:debugging in your Firefox search bar
@@ -15,4 +13,4 @@ When I went to find a Microsoft Word style equivalent for Firefox, I became very
 5. Open the unzipped folder in your file manager and choose manifest.json
 6. Go into Google Docs and see everything work as expected!
 
-I currently support Google Docs and the Cells in Google Sheets, the text in Google sheets is what is currently being added
+It currently supports Google Docs and the Cells in Google Sheets, the text in Google sheets is what is currently being added
