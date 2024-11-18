@@ -4,19 +4,33 @@ function applyTransitionEffect(delay, easing) {
 
   for (let cursor of cursors) {
     if (cursor) {
-      // Set the transition effect directly to the cursor element's style
-      cursor.style.transition = `all ${delay}ms ${easing}`;
+      // Check if the transition property is already set to the desired value
+      if (cursor.style.transition !== `all ${delay}ms ${easing}`) {
+        // Apply the transition effect to each cursor
+        cursor.style.transition = `all ${delay}ms ${easing}`;
+      }
     }
   }
 }
 
-// Get the transition delay and easing function from browser storage and apply the transition effect
-browser.storage.local.get(['transitionDelay', 'transitionEasing']).then((data) => {
-  const delay = data.transitionDelay || 100; // Default to 100ms if not set
-  const easing = data.transitionEasing || 'ease'; // Default to 'ease' if not set
-  applyTransitionEffect(delay, easing);
+// Listen for messages from the popup to update settings dynamically
+browser.runtime.onMessage.addListener((message) => {
+  if (message.action === 'updateSettings') {
+    const { delay, easing } = message;
+    applyTransitionEffect(delay, easing);
+  }
+});
 
-  // Observe for changes in the document and reapply the transition effect
+// Load initial settings when the content script is first injected
+browser.storage.local.get(['transitionDelay', 'transitionEasing']).then((data) => {
+  const delay = parseInt(data.transitionDelay, 10) || 80; // Default to 80ms if not set
+  const easing = data.transitionEasing || 'ease'; // Default to 'ease' if not set
+
+  // Initial application and start observing changes
+  applyTransitionEffect(delay, easing);
+  startCursorObserver(delay, easing);
+
+ // Observe DOM changes and reapply the transition effect
   const observer = new MutationObserver(() => applyTransitionEffect(delay, easing));
   observer.observe(document.body, { childList: true, subtree: true });
 });

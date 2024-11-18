@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const easingSelect = document.getElementById('easing');
   const saveButton = document.getElementById('save');
 
-  browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
+  browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
     const currentTab = tabs[0];
     if (currentTab && currentTab.url) {
       const isSupported = checkSupport(currentTab.url);
@@ -20,24 +20,31 @@ document.addEventListener('DOMContentLoaded', () => {
       settingsDiv.classList.remove('hidden');
       unsupportedDiv.classList.add('hidden');
 
-      // Load the saved delay and easing value from browser storage
-      browser.storage.local.get(['transitionDelay', 'transitionEasing'], (data) => {
-        console.log('Loaded data:', data);  // Log to check what is loaded from storage
-        if (data.transitionDelay) {
-          delayInput.value = data.transitionDelay;
-        }
-        if (data.transitionEasing) {
-          easingSelect.value = data.transitionEasing;
-        }
+      // Load the saved delay and easing values from storage
+      browser.storage.local.get(['transitionDelay', 'transitionEasing']).then((data) => {
+        delayInput.value = data.transitionDelay || 80; // Default to 80ms
+        easingSelect.value = data.transitionEasing || 'ease'; // Default to 'ease'
       });
 
-      // Save the delay and easing value to browser storage
+      // Save the new delay and easing values and apply them immediately
       saveButton.addEventListener('click', () => {
-        const delay = delayInput.value;
+        const delay = parseInt(delayInput.value, 10);
         const easing = easingSelect.value;
+
+        // Save settings to storage
         browser.storage.local.set({ transitionDelay: delay, transitionEasing: easing }, () => {
-          alert('Transition settings saved! The page will reload to apply changes.');
-          browser.tabs.reload();  // This will reload the current tab to apply the changes
+          // Send a message to the content script to apply the new settings
+          saveButton.textContent = 'Saved!';
+
+          // Reset the button text after 2 seconds
+          setTimeout(() => {
+            saveButton.textContent = 'Save';
+          }, 2000); // Reset text after 2 seconds
+
+          browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+            const currentTab = tabs[0];
+            browser.tabs.sendMessage(currentTab.id, { action: 'updateSettings', delay, easing });
+          });
         });
       });
     } else {
