@@ -20,7 +20,7 @@ function startCursorObserver(delay, easing) {
 
 // Initialize the script
 browser.storage.local.get(['transitionDelay', 'transitionEasing']).then((data) => {
-  const delay = parseInt(data.transitionDelay, 10) || 100; // Default to 100ms if not set
+  const delay = parseInt(data.transitionDelay, 10) || 80; // Default to 100ms if not set
   const easing = data.transitionEasing || 'ease'; // Default to 'ease' if not set
 
   // Initial application and start observing changes
