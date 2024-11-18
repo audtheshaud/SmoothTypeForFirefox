@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Save settings to storage
         browser.storage.local.set({ transitionDelay: delay, transitionEasing: easing }).then(() => {
           // Send a message to the content script to apply the new settings
+          saveButton.textContent = 'Saved!';
+
+          // Reset the button text after 2 seconds
+          setTimeout(() => {
+            saveButton.textContent = 'Save';
+          }, 2000); // Reset text after 2 seconds
+          
           browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
             const currentTab = tabs[0];
             browser.tabs.sendMessage(currentTab.id, { action: 'updateSettings', delay, easing });
