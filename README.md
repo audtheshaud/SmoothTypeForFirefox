@@ -5,7 +5,7 @@ When I went to find a Microsoft Word style equivalent for Firefox, I became very
 ### ALL CREDIT GOES TO https://github.com/jsz-05/jsz-SmoothType 
 ### They made this amazing Chrome Extension!
 
-## It is still somewhat broken, as I have only just started going through the code
+### It is still somewhat broken, as I have only just started going through the code
 
 ## To use it:
 1. Download the code as a .ZIP and extract
