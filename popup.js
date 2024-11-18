@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentTab = tabs[0];
             browser.tabs.sendMessage(currentTab.id, { action: 'updateSettings', delay, easing });
           });
-
-          alert('Settings applied successfully!');
         });
       });
     } else {
