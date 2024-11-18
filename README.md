@@ -14,3 +14,5 @@ When I went to find a Microsoft Word style equivalent for Firefox, I became very
 4. Click on Choose Load Temporary Add-on
 5. Open the unzipped folder in your file manager and choose manifest.json
 6. Go into Google Docs and see everything work as expected!
+
+I currently support Google Docs and the Cells in Google Sheets, the text in Google sheets is what is currently being added
