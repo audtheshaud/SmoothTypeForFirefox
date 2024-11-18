@@ -21,14 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
       unsupportedDiv.classList.add('hidden');
 
       // Load the saved delay and easing value from browser storage
-      browser.storage.local.get(['transitionDelay', 'transitionEasing'], (data) => {
+      browser.storage.local.get(['transitionDelay', 'transitionEasing']).then((data) => {
         console.log('Loaded data:', data);  // Log to check what is loaded from storage
-        if (data.transitionDelay) {
-          delayInput.value = data.transitionDelay;
-        }
-        if (data.transitionEasing) {
-          easingSelect.value = data.transitionEasing;
-        }
+        delayInput.value = data.transitionDelay !== undefined ? data.transitionDelay : 80;
+        easingSelect.value = data.transitionEasing || 'ease';
       });
 
       // Save the delay and easing value to browser storage
